@@ -9,14 +9,23 @@ const TodoForm = () => {
   const descriptionRef = useRef();
   const dispatch = useDispatch();
 
-  const addTodoHandler = () => {
+  const addTodoHandler = async () => {
     const newTodo = {
       id: Math.floor(Math.random() * 100),
       task: taskRef.current.value,
       description: descriptionRef.current.value,
     };
 
-    dispatch(todoAction.addTodos(newTodo));
+    // dispatch(todoAction.addTodos(newTodo));
+
+    const response = await fetch("/api/tasks", {
+      method: "POST",
+      body: JSON.stringify(newTodo),
+      headers: { "Content-Type": "application/json" },
+    });
+
+    const data = await response.json();
+    console.log(data);
   };
 
   return (
