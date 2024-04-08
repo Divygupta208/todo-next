@@ -16,7 +16,7 @@ const TodoForm = () => {
       description: descriptionRef.current.value,
     };
 
-    // dispatch(todoAction.addTodos(newTodo));
+    dispatch(todoAction.addTodos(newTodo));
 
     const response = await fetch("/api/tasks", {
       method: "POST",
@@ -48,6 +48,7 @@ const TodoForm = () => {
       >
         +
       </button>
+
       <Link href={"/checked"}>
         <button>Go to Completed</button>
       </Link>

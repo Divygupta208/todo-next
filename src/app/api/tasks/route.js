@@ -17,3 +17,19 @@ export async function POST(req) {
 
   return new Response(JSON.stringify(result));
 }
+
+export async function GET(req) {
+  const client = await MongoClient.connect(
+    "mongodb+srv://divygupta208:Od3ZfMtHifvrEy4g@cluster0.wq9srs7.mongodb.net/todos?retryWrites=true&w=majority&appName=Cluster0"
+  );
+
+  const db = client.db();
+
+  const todoCollection = db.collection("tasks");
+
+  const todos = await todoCollection.find().toArray();
+
+  client.close();
+
+  return new Response(JSON.stringify(todos));
+}
