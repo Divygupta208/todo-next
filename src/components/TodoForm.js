@@ -13,6 +13,7 @@ const TodoForm = () => {
     const newTodo = {
       id: Math.floor(Math.random() * 100),
       task: taskRef.current.value,
+      completed: false,
       description: descriptionRef.current.value,
     };
 
@@ -23,9 +24,6 @@ const TodoForm = () => {
       body: JSON.stringify(newTodo),
       headers: { "Content-Type": "application/json" },
     });
-
-    const data = await response.json();
-    console.log(data);
   };
 
   return (

@@ -9,8 +9,16 @@ const TodoListItem = ({ todo }) => {
     dispatch(todoAction.removeTodos(todo.id));
   };
 
-  const checkedTodosHandler = () => {
+  const checkedTodosHandler = async () => {
     setIsChecked(!isChecked);
+
+    const response = await fetch(`/api/tasks/${todo._id}`, {
+      method: "PUT",
+      body: JSON.stringify({
+        completed: true,
+      }),
+    });
+
     dispatch(todoAction.addCompletedTodos(todo));
   };
 
