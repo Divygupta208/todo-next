@@ -25,3 +25,23 @@ export async function PUT(request, context) {
 
   return NextResponse.json({ result });
 }
+
+export async function DELETE(request, context) {
+  const taskId = context.params.taskId;
+  const filter = { _id: new ObjectId(taskId) };
+
+  const client = await MongoClient.connect(
+    "mongodb+srv://divygupta208:Od3ZfMtHifvrEy4g@cluster0.wq9srs7.mongodb.net/todos?retryWrites=true&w=majority&appName=Cluster0"
+  );
+
+  const db = client.db();
+
+  const todoCollection = db.collection("tasks");
+
+  const result = await todoCollection.deleteOne(filter);
+
+  return NextResponse.json({
+    message: "Successfully deleted",
+    response: result,
+  });
+}

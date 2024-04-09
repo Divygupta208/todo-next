@@ -25,9 +25,7 @@ const TodoList = () => {
   return (
     <div>
       <ul>
-        {todos?.map((todo) => (
-          <TodoListItem todo={todo} />
-        ))}
+        {todos?.map((todo) => !todo.completed && <TodoListItem todo={todo} />)}
       </ul>
     </div>
   );
